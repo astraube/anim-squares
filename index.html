@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>Animation Squares</title>
+
+  <style>
+    html, body {
+      height:100%;
+      overflow:hidden
+    }
+
+    body {
+      border:0;
+      margin:0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id='sqrs-grid'></canvas>
+
+  <script src='http://rawgit.com/lodash/lodash/2.4.1/dist/lodash.js'></script>
+  <script src='anim-squares.js'></script>
+  <script>
+    var pastelMix = 130;
+    var getRandomPastelColor = function () {
+      return "rgb(#,#,#)".replace(/#/g, function () { return (Math.round(Math.random() * pastelMix) + pastelMix); });
+    };
+
+    var renderSquare = function (ctx, cols) {
+      ctx.fillStyle = getRandomPastelColor();
+      ctx.fillRect(0, 0, cols, cols);
+    };
+
+    var options = {
+      height: document.body.offsetHeight,
+      width: document.body.offsetWidth,
+
+      shapeFn: renderSquare
+    };
+
+
+    var sqrs = new Squares(document.getElementById('sqrs-grid'), options);
+    sqrs.tick();
+  </script>
+</body>
+</html>
